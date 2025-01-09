@@ -11,9 +11,23 @@
 <form method="POST" th:object="${tasksList}">
   <button>Submit Your Task</button>
 </form>
-<!--<ul>-->
-<!--  <li th:each="task : ${tasksList.tasks}">-->
-<!--    <span th:text="${task.name}">task name</span></li>-->
-<!--</ul>-->
+<p th:if="${tasksList == null and tasksList.tasks.isEmpty()}">
+  No items available
+</p>
+<p th:if="${tasksList == null and tasksList.tasks.isEmpty()}">
+      <li th:each="task : ${tasksList.tasks}">
+        <span th:text="${task.name}">task name</span>
+      </li>
+</p>
+<!--<div th:if="${tasksList != null and !tasksList.tasks.isEmpty()}">-->
+<!--  <ul>-->
+<!--    <li th:each="task : ${tasksList.tasks}">-->
+<!--      <span th:text="${task.name}">task name</span>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--  <p th:unless="${tasksList != null and !tasksList.tasks.isEmpty()}">-->
+<!--    No items available.-->
+<!--  </p>-->
+<!--</div>-->
 </body>
 </html>
