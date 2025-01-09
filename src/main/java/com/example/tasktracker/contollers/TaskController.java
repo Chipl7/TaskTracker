@@ -1,11 +1,11 @@
 package com.example.tasktracker.contollers;
 
 import com.example.tasktracker.model.Task;
+import com.example.tasktracker.model.TasksList;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/task")
@@ -13,12 +13,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class TaskController {
 
     @GetMapping("/add")
-    public String addTask() {
+    public String addTask(Model model) {
         return "addTask";
     }
 
     @ModelAttribute(name = "task")
     public Task task() {
         return new Task();
+    }
+
+    @PostMapping
+    public String processTask(Task task, TasksList tasksList, SessionStatus sessionStatus) {
+        tasksList.addTask(task);
+        sessionStatus.setComplete();
+        return "redirect:/";
     }
 }
