@@ -10,7 +10,7 @@ public class Task {
 
     private Long id;
 
-    private Date createdAt = new Date();
+    private Date date = new Date();
 
     private String name;
 
