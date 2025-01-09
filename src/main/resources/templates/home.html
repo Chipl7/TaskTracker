@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Tasks Page</title>
+</head>
+
+<body>
+<h1>Your tasks</h1>
+
+<form method="POST" th:object="${tasksList}">
+  <button>Submit Your Task</button>
+</form>
+<!--<ul>-->
+<!--  <li th:each="task : ${tasksList.tasks}">-->
+<!--    <span th:text="${task.name}">task name</span></li>-->
+<!--</ul>-->
+</body>
+</html>
