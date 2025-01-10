@@ -7,14 +7,14 @@
 <body>
 <form method="POST" th:action="@{/task}" th:object="${task}">
 <h1>Add Task</h1>
-<label for="name">Name your task:</label>
-<input id="name" name="taskName" type="text"/>
+    <label for="name">Name your task:</label>
+    <input id="name" name="name" type="text" th:field="*{name}"/>
     <br>
     <label for="description">Description your task:</label>
-    <input id="description" name="taskDescription" type="text"/>
+    <input id="description" name="description" type="text" th:field="*{descriptions}"/>
     </br>
     <label for="date">Date your task:</label>
-    <input id="date" name="taskDate" type="date"/>
+    <input id="date" name="date" type="date" th:field="*{date}"/>
     <br>
     <button>Add task</button>
     </br>
