@@ -2,8 +2,10 @@ package com.example.tasktracker.contollers;
 
 import com.example.tasktracker.model.Task;
 import com.example.tasktracker.model.TasksList;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -22,7 +24,10 @@ public class TaskController {
     }
 
     @PostMapping
-    public String processTask(Task task, @ModelAttribute TasksList tasksList) {
+    public String processTask(@Valid Task task, Errors errors, @ModelAttribute TasksList tasksList) {
+        if (errors.hasErrors()) {
+            return "addTask";
+        }
         tasksList.addTask(task);
         return "redirect:/";
     }
