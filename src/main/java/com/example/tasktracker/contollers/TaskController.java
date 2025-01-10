@@ -5,11 +5,10 @@ import com.example.tasktracker.model.TasksList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/task")
-@SessionAttributes("taskList")
+@SessionAttributes("tasksList")
 public class TaskController {
 
     @GetMapping("/add")
@@ -23,9 +22,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public String processTask(Task task, TasksList tasksList, SessionStatus sessionStatus) {
+    public String processTask(Task task, @ModelAttribute TasksList tasksList) {
         tasksList.addTask(task);
-        sessionStatus.setComplete();
         return "redirect:/";
     }
 }
