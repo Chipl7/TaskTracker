@@ -2,7 +2,7 @@ package com.example.tasktracker.contollers;
 
 import com.example.tasktracker.model.Task;
 import com.example.tasktracker.model.TasksList;
-import com.example.tasktracker.repository.TaskRepository;
+import com.example.tasktracker.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/task")
 @SessionAttributes("tasksList")
 public class TaskController {
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    public TaskController(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping("/add")
@@ -31,10 +31,9 @@ public class TaskController {
 
     @PostMapping
     public String processTask(@Valid Task task, Errors errors, @ModelAttribute TasksList tasksList) {
-        if (errors.hasErrors()) {
+        if (taskService.addTask(task, errors) == false) {
             return "addTask";
         }
-        taskRepository.save(task);
         tasksList.addTask(task);
         return "redirect:/";
     }
