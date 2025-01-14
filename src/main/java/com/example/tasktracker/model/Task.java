@@ -17,7 +17,8 @@ import java.util.Date;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "taskIdSeq", sequenceName = "task_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
     private Long id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
