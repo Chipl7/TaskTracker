@@ -1,6 +1,8 @@
 package com.example.tasktracker.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -10,20 +12,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data //TODO
+@Entity
+@Table(name = "task")
 public class Task {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
+    @Column(name = "data")
     private Date date = new Date();
 
     @NotNull
     @Size(min = 3, message = "Name must be at least 3 characters long")
+    @Column(name = "name")
     private String name;
 
     @NotNull
     @Size(min = 4, message = "Descriptions must be at least 4 characters long")
+    @Column(name = "descriptions")
     private String descriptions;
 
     public void setName(String name) {
