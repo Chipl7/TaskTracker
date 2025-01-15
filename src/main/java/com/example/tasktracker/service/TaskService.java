@@ -2,10 +2,13 @@ package com.example.tasktracker.service;
 
 import com.example.tasktracker.model.Task;
 import com.example.tasktracker.repository.TaskRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
+
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TaskService {
     private TaskRepository taskRepository;
 
@@ -13,11 +16,11 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public boolean addTask(Task task, Errors errors) {
-        if (errors.hasErrors()) {
-            return false;
-        }
+    public void save(Task task) {
         taskRepository.save(task);
-        return true;
+    }
+
+    public List<Task> findAll() {
+        return taskRepository.findAll();
     }
 }
