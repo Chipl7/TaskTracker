@@ -1,28 +1,33 @@
 package com.example.tasktracker.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Data //TODO
+
 @Entity
 @Table(name = "task")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Task {
 
     @Id
-    @SequenceGenerator(name = "taskIdSeq", sequenceName = "task_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
+    @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
     private Long id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
+    @Future(message = "Date must be in the future")
     @Column(name = "data")
     private Date date = new Date();
 
@@ -36,35 +41,27 @@ public class Task {
     @Column(name = "descriptions")
     private String descriptions;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
     }
 
     public String getDescriptions() {
         return descriptions;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
