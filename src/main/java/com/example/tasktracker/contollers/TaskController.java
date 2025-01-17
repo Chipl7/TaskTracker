@@ -1,9 +1,7 @@
 package com.example.tasktracker.contollers;
 
 import com.example.tasktracker.model.Task;
-import com.example.tasktracker.repository.TaskRepository;
 import com.example.tasktracker.service.TaskService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
